@@ -36,7 +36,7 @@ That way you can use Google Sheets as a CMS for your website or as a database fo
 
 You will need to set up a Google Cloud project to use teburu. This is because teburu uses the Google Sheets API to read and write to your spreadsheet. The free quota (300 requests per minute) should be enough for most use cases if you factor in caching. You can follow the steps below to set up a Google Cloud project:
 
-- Go to the Google Cloud Console ([console.cloud.google.com](https://console.cloud.google.com])) and create a new project.
+- Go to the Google Cloud Console ([console.cloud.google.com](https://console.cloud.google.com)) and create a new project.
 - Enable the Google Sheets API for your project by searching for "Google Sheets API" in the API Library and enabling it.
 - Create API credentials by navigating to the "Credentials" section and clicking on "Create credentials" -> "Service account key". Select the appropriate service account and choose JSON as the key type. Download the JSON file that contains your credentials.
 - Also save the email address (``*.gserviceaccount.com``) of the service account that you created. You will need this later.
