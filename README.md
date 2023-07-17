@@ -90,6 +90,38 @@ Install teburu with one of the following methods and then run it with ``teburu``
 
 ```go install github.com/BigJk/teburu/cmd/teburu@latest```
 
+### Docker
+
+You can also run teburu with docker. You can use the following command to run teburu with docker. Use the environment variables or the config.yaml file to configure teburu:
+
+```bash 
+docker run -p 8753:8753 \\
+-v /location/sheet_creds.json:/creds.json \\
+-e TEBURU_CACHE=1 \\
+-e TEBURU_CACHE_TTL=5m0s \\
+ghcr.io/bigjk/teburu:latest 
+```
+
+<details>
+<summary>docker-compose.yml example</summary>
+
+```yaml
+version: "3.8"
+
+services:
+  teburu:
+    image: ghcr.io/bigjk/teburu:latest
+    ports:
+      - 8753:8753
+    volumes:
+      - /location/sheet_creds.json:/creds.json
+    environment:
+      - TEBURU_CACHE=1
+      - TEBURU_CACHE_TTL=5m0s
+```
+
+</details>
+
 ## config.yaml
 
 After starting teburu for the first time, a config.yaml file will be created in the current directory. You can use this file to configure teburu.
@@ -109,14 +141,10 @@ gzip: true # Whether to enable gzip compression
 
 Alternatively you can also use environment variables to configure teburu. The environment variables are prefixed with ``TEBURU_`` and are all uppercase. For example ``TEBURU_BIND`` or ``TEBURU_CACHE``.
 
-## Docker
-
-todo
-
 ## TODO
 
 - [ ] Updating rows
 - [ ] Deleting rows
 - [ ] Adding rows
 - [ ] Filtering rows
-- [ ] Docker
+- [x] Docker
