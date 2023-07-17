@@ -225,6 +225,19 @@ func (s *Server) EnableCORS() {
 	s.Echo.Use(middleware.CORS())
 }
 
+// EnableGzip enables gzip compression for all routes
+func (s *Server) EnableGzip() {
+	s.Echo.Use(middleware.Gzip())
+}
+
+// SetRequestTimeout sets request timeout for all routes. This is important to prevent
+// long-running requests from blocking the server
+func (s *Server) SetRequestTimeout(timeout time.Duration) {
+	s.Echo.Use(middleware.TimeoutWithConfig(middleware.TimeoutConfig{
+		Timeout: timeout,
+	}))
+}
+
 // EnableCaching enables caching for all routes
 func (s *Server) EnableCaching(ttl time.Duration) {
 	c := freecache.NewCache(1024 * 1024 * 5)

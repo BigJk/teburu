@@ -61,15 +61,6 @@ Returns the contents of the sheet as a JSON array.
 - ``id``: The ID of your spreadsheet. This is the long string of characters in the URL of your spreadsheet.
 - ``sheet``: The name of the sheet in your spreadsheet.
 
-#### Query Parameter
-
-- ``case``: The case of the keys in the JSON response. Can be ``camel``, ``snake``, ``kebab``, ``plain`` and ``screaming_snake``. Defaults to ``camel``.
-- ``columns``: The columns to return in the JSON response in comma seperated form like ``name,description``. Defaults to all columns.
-- ``format``: The format of the JSON response. Can be ``simple``, ``dynamic`` and ``complex``. Defaults to ``simple``.
-  - ``simple``: Returns row fields as simple ``"key": "value"`` pairs.
-  - ``complex``: Returns the row fields as ``"key": { "value": "...", "hyperlink": "http://..." }`` where hyperlink contains the hyperlink if the cell contains one.
-  - ``dynamic``: Returns the row fields as ``complex`` if the cell contains a hyperlink, otherwise as ``simple``.
-
 ### GET /api/sheet/:id/:sheet/:eid
 
 Returns a single row from the sheet as a JSON object.
@@ -80,14 +71,16 @@ Returns a single row from the sheet as a JSON object.
 - ``sheet``: The name of the sheet in your spreadsheet.
 - ``eid``: The ID of the row to return. This is the number in the first column of your spreadsheet.
 
-#### Query Parameter
+### Query Parameter
+
+Additional query parameters can be added to the URL to modify the JSON response.
 
 - ``case``: The case of the keys in the JSON response. Can be ``camel``, ``snake``, ``kebab``, ``plain`` and ``screaming_snake``. Defaults to ``camel``.
 - ``columns``: The columns to return in the JSON response in comma seperated form like ``name,description``. Defaults to all columns.
 - ``format``: The format of the JSON response. Can be ``simple``, ``dynamic`` and ``complex``. Defaults to ``simple``.
-    - ``simple``: Returns row fields as simple ``"key": "value"`` pairs.
-    - ``complex``: Returns the row fields as ``"key": { "value": "...", "hyperlink": "http://..." }`` where hyperlink contains the hyperlink if the cell contains one.
-    - ``dynamic``: Returns the row fields as ``complex`` if the cell contains a hyperlink, otherwise as ``simple``.
+  - ``simple``: Returns row fields as simple ``"key": "value"`` pairs.
+  - ``complex``: Returns the row fields as ``"key": { "value": "...", "hyperlink": "http://..." }`` where hyperlink contains the hyperlink if the cell contains one.
+  - ``dynamic``: Returns the row fields as ``complex`` if the cell contains a hyperlink, otherwise as ``simple``.
 
 ## Install
 
@@ -108,7 +101,13 @@ cache_ttl: 5m0s # The time to cache the requests for
 cors: true # Whether to enable CORS
 credentials_file: ./creds.json # The path to the credentials file from Google Cloud
 rate_limit: 5 # The number of requests per minute to allow, 0 for no limit
+request_timeout: 10s # The timeout for requests to the webserver, 0 for no timeout
+gzip: true # Whether to enable gzip compression
 ```
+
+### Environment Variables
+
+Alternatively you can also use environment variables to configure teburu. The environment variables are prefixed with ``TEBURU_`` and are all uppercase. For example ``TEBURU_BIND`` or ``TEBURU_CACHE``.
 
 ## Docker
 

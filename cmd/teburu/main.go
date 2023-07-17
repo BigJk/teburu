@@ -20,12 +20,16 @@ const (
 	ConfigRateLimit       = "rate_limit"
 	ConfigCaching         = "cache"
 	ConfigCacheTTL        = "cache_ttl"
+	ConfigGzip            = "gzip"
+	ConfigRequestTimeout  = "request_timeout"
 )
 
 func setupConfig() {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
+	viper.SetEnvPrefix("teburu")
+	viper.AutomaticEnv()
 
 	viper.SetDefault(ConfigCredentialsFile, "./creds.json")
 	viper.SetDefault(ConfigCors, true)
@@ -33,6 +37,8 @@ func setupConfig() {
 	viper.SetDefault(ConfigRateLimit, 5.0)
 	viper.SetDefault(ConfigCaching, false)
 	viper.SetDefault(ConfigCacheTTL, 5*time.Minute)
+	viper.SetDefault(ConfigGzip, true)
+	viper.SetDefault(ConfigRequestTimeout, 10*time.Second)
 
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
@@ -57,6 +63,14 @@ func main() {
 
 	// Setup server
 	server := teburu.NewServer(service)
+
+	if viper.GetDuration(ConfigRequestTimeout) > 0 {
+		server.SetRequestTimeout(viper.GetDuration(ConfigRequestTimeout))
+	}
+
+	if viper.GetBool(ConfigGzip) {
+		server.EnableGzip()
+	}
 
 	if viper.GetBool(ConfigCors) {
 		server.EnableCORS()
