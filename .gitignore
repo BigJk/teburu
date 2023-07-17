@@ -3,4 +3,4 @@
 *.dll
 *.so
 *.dylib
-*.yaml
+/*.yaml
