@@ -1,8 +1,8 @@
-# てぶる ー teburu
+# 🗂️ てぶる ー teburu
 
 Self-hosted Google Sheets as an API. It's like a self-hosted version of [Sheety](https://sheety.co/) and [Sheet2API](https://sheet2api.com/).
 
-## Idea
+## 💡 Idea
 
 The basic idea is that if you had a google sheet table like that:
 
@@ -30,7 +30,7 @@ You could access it as a JSON API like that:
 
 That way you can use Google Sheets as a CMS for your website or as a database for your app. This is especially useful if you have non-technical people who need to edit the data, or you need a quick prototyping solution without having to set up a management ui.
 
-## Pre-requisites
+## ⚠️ Pre-requisites
 
 ### 1. Set up a Google Cloud project
 
@@ -50,7 +50,7 @@ You will need to set up your spreadsheet to use teburu.
 - In the first row of the spreadsheet, add your column names. These will be the keys in your JSON response.
 - Now you can start adding data to your spreadsheet. You can add as many rows as you want. You can also add multiple sheets to your spreadsheet. Each sheet will be a separate endpoint in teburu.
 
-## Endpoints
+## 🌐 Endpoints
 
 ### GET /api/sheet/:id/:sheet
 
@@ -82,7 +82,7 @@ Additional query parameters can be added to the URL to modify the JSON response.
   - ``complex``: Returns the row fields as ``"key": { "value": "...", "hyperlink": "http://..." }`` where hyperlink contains the hyperlink if the cell contains one.
   - ``dynamic``: Returns the row fields as ``complex`` if the cell contains a hyperlink, otherwise as ``simple``.
 
-## Install
+## 💻 Install
 
 Install teburu with one of the following methods and then run it with ``teburu``.
 
