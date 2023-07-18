@@ -34,7 +34,7 @@ That way you can use Google Sheets as a CMS for your website or as a database fo
 
 ### 1. Set up a Google Cloud project
 
-You will need to set up a Google Cloud project to use teburu. This is because teburu uses the Google Sheets API to read and write to your spreadsheet. The free quota (300 requests per minute) should be enough for most use cases if you factor in caching. You can follow the steps below to set up a Google Cloud project:
+You will need to set up a Google Cloud project to use teburu. This is because teburu uses the Google Sheets API to read and write to your spreadsheet. The free quota (300 requests per minute) should be enough for most smaller use cases if you factor in caching. You can follow the steps below to set up a Google Cloud project:
 
 - Go to the Google Cloud Console ([console.cloud.google.com](https://console.cloud.google.com)) and create a new project.
 - Enable the Google Sheets API for your project by searching for "Google Sheets API" in the API Library and enabling it.
@@ -45,14 +45,14 @@ You will need to set up a Google Cloud project to use teburu. This is because te
 
 You will need to set up your spreadsheet to use teburu.
 
-- Create a new spreadsheet in Google Sheets.
+- Create a new spreadsheet in Google Sheets or open a existing one.
 - Share the spreadsheet with the service account email address that you saved earlier. Give it edit access.
 - In the first row of the spreadsheet, add your column names. These will be the keys in your JSON response.
 - Now you can start adding data to your spreadsheet. You can add as many rows as you want. You can also add multiple sheets to your spreadsheet. Each sheet will be a separate endpoint in teburu.
 
 ## 🌐 Endpoints
 
-### GET /api/sheet/:id/:sheet
+### (GET) ``/api/sheet/:id/:sheet``
 
 Returns the contents of the sheet as a JSON array.
 
@@ -61,7 +61,7 @@ Returns the contents of the sheet as a JSON array.
 - ``id``: The ID of your spreadsheet. This is the long string of characters in the URL of your spreadsheet.
 - ``sheet``: The name of the sheet in your spreadsheet.
 
-### GET /api/sheet/:id/:sheet/:eid
+### (GET) ``/api/sheet/:id/:sheet/:eid``
 
 Returns a single row from the sheet as a JSON object.
 
@@ -84,11 +84,13 @@ Additional query parameters can be added to the URL to modify the JSON response.
 
 ## 💻 Install
 
-Install teburu with one of the following methods and then run it with ``teburu``.
-
 ### Via Go
 
-```go install github.com/BigJk/teburu/cmd/teburu@latest```
+Install teburu via ``go install`` and then run it with ``teburu``.
+
+```bash
+go install github.com/BigJk/teburu/cmd/teburu@latest
+```
 
 ### Docker
 
